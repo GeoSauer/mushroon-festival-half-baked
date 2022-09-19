@@ -39,14 +39,18 @@ const mushroomTypeFound = [porcini, porcini, porcini, morel, morel, chanterelle]
 const foundMessage = ['No mushrooms found!', 'You found 1 mushroom', 'You found 2 mushrooms'];
 
 huntMushroomsButton.addEventListener('click', () => {
+    // get a random number of mushrooms
     const found = getRandomItem(amountFound);
-
+    // loop for each mushroom we need to create
     for (let i = 0; i < found; i++) {
+        // get a random mushroom
         const mushroomType = getRandomItem(mushroomTypeFound);
+        // create a mushroom object
         const mushroom = {
             type: mushroomType.type,
         };
         // > add the new mushroom to the mushrooms state
+        mushrooms.push(mushroom);
     }
 
     message = foundMessage[found];
@@ -93,8 +97,12 @@ function displayMushrooms() {
     mushroomContainer.innerHTML = '';
 
     // > loop the mushrooms
-    // create a mushroom element using the renderMushroom function
-    // append it to the container
+    for (let mushroom of mushrooms) {
+        // create a mushroom element using the renderMushroom function
+        const mushroomEl = renderMushroom(mushroom);
+        // append it to the container
+        mushroomContainer.append(mushroomEl);
+    }
 }
 
 function displayFriends() {
