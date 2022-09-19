@@ -60,22 +60,30 @@ huntMushroomsButton.addEventListener('click', () => {
 });
 
 addFriendForm.addEventListener('submit', (e) => {
+    // stop the form from re-posting to the same browser page
     e.preventDefault();
+    // use a form data object
     const formData = new FormData(addFriendForm);
 
     // > create a new friend, with a "name" property that
     // is populated from `formData.get('name')` and a
     // "satisfied" property with an initial value of 0
-
+    const friend = {
+        name: formData.get('name'),
+        satisfied: 0,
+    };
     // > add the new friend to the friends array
-
+    friends.push(friend);
     // > set the message state to let the user know
     // they invited a new friend to the festival, include the friend's
     // name in the message
+    message = `${friend.name} has shown up at the festival, make sure they get some mushrooms!`;
 
     addFriendForm.reset();
 
     // > call the display functions that need to re-display
+    displayFriends();
+    displayMessage();
 });
 
 sayGoodbyeButton.addEventListener('click', () => {
