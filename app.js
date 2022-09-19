@@ -12,7 +12,7 @@ const friendsSection = document.getElementById('friends-section');
 
 /* State */
 let message = '';
-let mushrooms = [{ type: 'porcini' }, { type: 'chanterelle' }, { type: 'morel' }];
+let mushrooms = [];
 
 let friends = [
     { name: 'Wilbur', satisfied: 0 },
@@ -122,6 +122,11 @@ function displayFriends() {
         friendEl.addEventListener('click', () => {
             // > handle the three possible outcomes:
             // 1. No mushrooms, set a message to go hunt for more
+            if (mushrooms < 1) {
+                message = 'Your friends are hungry, go hunt down some mushrooms!';
+                displayMessage();
+                return;
+            }
             // 2. Friend is already fully satisfied (3), set a message to pick another friend
             // 3. Feed friend mushroom:
             // a. "pop" a mushroom off the mushrooms array
